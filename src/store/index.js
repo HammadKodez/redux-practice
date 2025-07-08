@@ -1,4 +1,5 @@
-"use client";
+// store/index.js
+"use client"; // Keep this as it relies on window.__REDUX_DEVTOOLS_EXTENSION__
 import { combineReducers, createStore } from "redux";
 import productsReducer from "./productsReducer";
 import cartReducer, {
@@ -19,21 +20,7 @@ const reducer = combineReducers({
 
 export const store = createStore(
   reducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__?.()
+  typeof window !== "undefined" && window.__REDUX_DEVTOOLS_EXTENSION__?.() // Safely access window
 );
 
-// console.log(store);
-
-// store.dispatch(addCartItem(1));
-// store.dispatch(addCartItem(12));
-
-// store.dispatch(increaseCartItemQuantity(12));
-
-// store.dispatch(decreaseCartItemQuantity(12));
-// store.dispatch(decreaseCartItemQuantity(12));
-
-// store.dispatch(addWishListItem(18));
-// store.dispatch(addWishListItem(11));
-
-// store.dispatch(removeWishListItem(11));
-// store.dispatch(removeWishListItem(18));
+console.log("Redux store initialized:", store); // This will show in the browser console
